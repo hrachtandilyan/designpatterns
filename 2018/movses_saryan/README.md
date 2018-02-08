@@ -1,0 +1,1 @@
+To generate makefiles or visual studio project run cmake with source directory as src/
