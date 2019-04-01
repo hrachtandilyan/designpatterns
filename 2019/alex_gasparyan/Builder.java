@@ -1,4 +1,15 @@
-public class User {
+class Test {
+
+	public static void main(String[] args) {
+		User user = new User.Builder()
+			.setName("Aleksey")
+			.setLastname("Gasparyan")
+			.setAge(22)
+			.build();
+	}
+}
+
+class User {
     private String name;
     private String lastname;
     private int age;
