@@ -1,25 +1,34 @@
 //Singleton Design Pattern
 #include <iostream>
 #include <string>
+#include <mutex>   
 
 using namespace std;
+
+
+mutex mtx;
 
 class Singleton {
 public:
 	static Singleton* getInstance() {
 		if (_instance == 0) {
+		    
+		    // Making thread safe
+		    lock_guard<mutex> lck (mtx);
+		    if (_instance == 0) {
 			_instance = new Singleton;
+		    }
 		}
 
 		return _instance;
 	}
 
 	int getData() {
-		return this->_data;
+		return _data;
 	}
 
 	void setData(int d) {
-		this->_data = d;
+		_data = d;
 	}
 
 private:
@@ -29,7 +38,7 @@ private:
 	Singleton(const Singleton&) = delete;
 	Singleton& operator=(const Singleton&) = delete;
 	Singleton(Singleton&&) = delete;
-	Singleton& operator+(Singleton&&) = delete;
+	Singleton& operator=(Singleton&&) = delete;
 	~Singleton() {}
 
 	static Singleton* _instance;
