@@ -13,7 +13,7 @@ public:
 
 class SamsungPhone : public Phone {
 	Phone * clone() {
-		return new SamsungPhone;
+		return new SamsungPhone(*this);
 	}
 	void makePhone() {
 		cout << "Congrats! Samsung Phone has been made.";
@@ -21,7 +21,7 @@ class SamsungPhone : public Phone {
 };
 class ApplePhone : public Phone {
 	Phone * clone() {
-		return new ApplePhone;
+		return new ApplePhone(*this);
 	}
 	void makePhone() {
 		cout << "Congrats! Apple Phone has been made.";
@@ -29,7 +29,7 @@ class ApplePhone : public Phone {
 };
 class SonyPhone : public Phone {
 	Phone * clone() {
-		return new SonyPhone;
+		return new SonyPhone(*this);
 	}
 	void makePhone() {
 		cout << "Congrats! Sony Phone has been made.";
