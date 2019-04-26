@@ -6,12 +6,13 @@ class Singleton
 	public String str;
 	
 	private Singleton() { str = "String part of Singleton class"; };
+	private static class BillPughSingleton {
+		
+		private static final Singleton instance = new Singleton();
+	}
 	public static Singleton Instance_Singleton() { 
-		if (instance == null) {
-			
-            instance = new Singleton(); 
-        } 
-        return instance; 
+		
+        return BillPughSingleton.instance; 
     }
 	public static void main(String []args) {
 		
