@@ -4,7 +4,7 @@ class Test {
         AbstractFactory factory1 = FactoryProvider.getFactory(FactoryProvider.Type.CAR);
         AbstractFactory factory2 = FactoryProvider.getFactory(FactoryProvider.Type.BIKE);
         Car car = (Car) factory1.create("BMW");
-        Bike bike = (Bike) factory1.create("KAWASAKI");
+        Bike bike = (Bike) factory2.create("KAWASAKI");
     }
 }
 
