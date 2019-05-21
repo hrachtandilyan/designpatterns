@@ -1,0 +1,11 @@
+C:\Users\evelina.ghazaryan\source\repos\FactoryMethodPattern\FactoryMethodPattern\bin\Debug\netcoreapp2.1\FactoryMethodPattern.deps.json
+C:\Users\evelina.ghazaryan\source\repos\FactoryMethodPattern\FactoryMethodPattern\bin\Debug\netcoreapp2.1\FactoryMethodPattern.runtimeconfig.json
+C:\Users\evelina.ghazaryan\source\repos\FactoryMethodPattern\FactoryMethodPattern\bin\Debug\netcoreapp2.1\FactoryMethodPattern.runtimeconfig.dev.json
+C:\Users\evelina.ghazaryan\source\repos\FactoryMethodPattern\FactoryMethodPattern\bin\Debug\netcoreapp2.1\FactoryMethodPattern.dll
+C:\Users\evelina.ghazaryan\source\repos\FactoryMethodPattern\FactoryMethodPattern\bin\Debug\netcoreapp2.1\FactoryMethodPattern.pdb
+C:\Users\evelina.ghazaryan\source\repos\FactoryMethodPattern\FactoryMethodPattern\obj\Debug\netcoreapp2.1\FactoryMethodPattern.csprojAssemblyReference.cache
+C:\Users\evelina.ghazaryan\source\repos\FactoryMethodPattern\FactoryMethodPattern\obj\Debug\netcoreapp2.1\FactoryMethodPattern.csproj.CoreCompileInputs.cache
+C:\Users\evelina.ghazaryan\source\repos\FactoryMethodPattern\FactoryMethodPattern\obj\Debug\netcoreapp2.1\FactoryMethodPattern.AssemblyInfoInputs.cache
+C:\Users\evelina.ghazaryan\source\repos\FactoryMethodPattern\FactoryMethodPattern\obj\Debug\netcoreapp2.1\FactoryMethodPattern.AssemblyInfo.cs
+C:\Users\evelina.ghazaryan\source\repos\FactoryMethodPattern\FactoryMethodPattern\obj\Debug\netcoreapp2.1\FactoryMethodPattern.dll
+C:\Users\evelina.ghazaryan\source\repos\FactoryMethodPattern\FactoryMethodPattern\obj\Debug\netcoreapp2.1\FactoryMethodPattern.pdb

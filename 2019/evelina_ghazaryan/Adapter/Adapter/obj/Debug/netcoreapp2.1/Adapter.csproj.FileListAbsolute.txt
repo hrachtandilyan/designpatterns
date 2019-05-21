@@ -1,0 +1,11 @@
+C:\Users\evelina.ghazaryan\source\repos\Adapter\Adapter\bin\Debug\netcoreapp2.1\Adapter.deps.json
+C:\Users\evelina.ghazaryan\source\repos\Adapter\Adapter\bin\Debug\netcoreapp2.1\Adapter.runtimeconfig.json
+C:\Users\evelina.ghazaryan\source\repos\Adapter\Adapter\bin\Debug\netcoreapp2.1\Adapter.runtimeconfig.dev.json
+C:\Users\evelina.ghazaryan\source\repos\Adapter\Adapter\bin\Debug\netcoreapp2.1\Adapter.dll
+C:\Users\evelina.ghazaryan\source\repos\Adapter\Adapter\bin\Debug\netcoreapp2.1\Adapter.pdb
+C:\Users\evelina.ghazaryan\source\repos\Adapter\Adapter\obj\Debug\netcoreapp2.1\Adapter.csprojAssemblyReference.cache
+C:\Users\evelina.ghazaryan\source\repos\Adapter\Adapter\obj\Debug\netcoreapp2.1\Adapter.csproj.CoreCompileInputs.cache
+C:\Users\evelina.ghazaryan\source\repos\Adapter\Adapter\obj\Debug\netcoreapp2.1\Adapter.AssemblyInfoInputs.cache
+C:\Users\evelina.ghazaryan\source\repos\Adapter\Adapter\obj\Debug\netcoreapp2.1\Adapter.AssemblyInfo.cs
+C:\Users\evelina.ghazaryan\source\repos\Adapter\Adapter\obj\Debug\netcoreapp2.1\Adapter.dll
+C:\Users\evelina.ghazaryan\source\repos\Adapter\Adapter\obj\Debug\netcoreapp2.1\Adapter.pdb
