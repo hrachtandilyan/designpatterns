@@ -11,7 +11,7 @@ public class BaseballPlayer implements Player {
         if (ball.getRadius() > MAX_PLAYABLE_BALL_RADIUS) {
             System.out.println("Too big for my bat :(");
         } else {
-            System.out.println("Fly, my ball, fly!");
+            System.out.println("I'm bat-man");
         }
     }
 }
