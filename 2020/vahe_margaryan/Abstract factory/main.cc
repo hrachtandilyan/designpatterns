@@ -7,12 +7,12 @@ int main(int argc, char** argv)
 {
   ProviderFactory* factory = LimitedProviderFactory::getInstance();
 
-  Provider* conectChina = factory->createProviderInstance();
+  Provider* connectChina = factory->createProviderInstance();
 
-  dynamic_cast<LimitedProvider*>(conectChina)->addBannedWebPage("www.facebook.com");
-  conectChina->addCustomer(Customer("192.0.0.123", Location("Armenia", "Yerevan")));
+  dynamic_cast<LimitedProvider*>(connectChina)->addBannedWebPage("www.facebook.com");
+  connectChina->addCustomer(Customer("192.0.0.123", Location("Armenia", "Yerevan")));
 
-  conectChina->redirect("www.facebook.com");
+  connectChina->redirect("www.facebook.com");
 
   return 0;
 }
