@@ -15,7 +15,7 @@ protected:
 		street_address{ _street_address }, post_code{ _post_code }, city{ _city },
 		company_name{ _company_name }, position{ _position }, annual_income{ _annual_income } {}
 public:
-	friend class Movie_CHaracter_Builder;
+	friend class Movie_Character_Builder;
 	friend class Movie_Character_Address_Builder;
 	friend class Movie_Character_Job_Builder;
 
