@@ -1,27 +1,5 @@
 \documentclass{beamer}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setbeamertemplate{navigation symbols}{}
-\usepackage{beamerthemeshadow}
-\usefonttheme{serif}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{graphicx}
-\graphicspath{ {res/} }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{polyglossia}
-\setdefaultlanguage{armenian}
-\setotherlanguages{english}
-\usepackage{fontspec}
-\newfontfamily\armenianfont{DejaVu Sans}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{minted}
-\setmonofont{Consolas}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{xltxtra}
-\usepackage{hyperref}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usetheme{Luebeck}
-\usecolortheme{crane}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{ArmenianSlides}
 
 \begin{document}
 
@@ -39,12 +17,15 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Command}
 \begin{block}{Նպատակը}
-    Տվյալ օբյեկտի համար տրամադրել այնպիսի փոխարինող, որը կվերահսկի նրան դիմումը:
+    Հարցումը ինկապսուլացնել օբյեկտի մեջ, դրանով իսկ թույլ տալ օբյեկտները տարբեր
+    հարցումներով պարամետրիզացնել, կազմել հարցումերի հերթեր, գրանցել հարցումները (log),
+    իրականացնել վերականգնելի (undoable) գործողություններ:
 \end{block}
 \vfill
 Նաև հայտնի է որպես
 \begin{itemize}
-    \item Surrogate
+    \item Action
+    \item Transaction
 \end{itemize}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -53,7 +34,31 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Մոտիվացիան}
 \begin{center}
-    \includegraphics[scale=0.3]{motivation.png}
+    \includegraphics[scale=0.4]{motivation1.png}
+\end{center}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Մոտիվացիան}
+\begin{center}
+    \includegraphics[scale=0.4]{motivation2.png}
+\end{center}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Մոտիվացիան}
+\begin{center}
+    \includegraphics[scale=0.4]{motivation3.png}
+\end{center}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Մոտիվացիան}
+\begin{center}
+    \includegraphics[scale=0.4]{motivation4.png}
 \end{center}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -62,11 +67,18 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Կիրառելիությունը}
 Այս Ն.Ձ. պետք է օգտագործել երբ.
-\vspace{0.5cm}
-\begin{itemize}
-    \item
-    \item
-\end{itemize}
+\vfill
+\begin{enumerate}
+    \scriptsize
+    \item Անհրաժեշտ է օբյեկտները պարամետրիզացնել կատարվելիք գործողությունով:
+    Հանդիսանում է պրոցեդուրալ լեզուներում կիրառվող callback ֆունկցիաի օբյեկտային
+    համարժեքը: \pause \vfill
+    \item Անհրաժեշտ է հարցումները տալ, հավաքել և կատարել ժամանակի տարբեր
+    պահերի: \pause \vfill
+    \item Անհրաժեշտ է տրամադրել undo գործողություն: \pause \vfill
+    \item Անհրաժեշտ է գրանցել փոփոխությունները այնպես, որ դրանք հնարավոր լինի
+    կրկնել համակարգի աշխատանքի խափանման պարագայում:
+\end{enumerate}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
 
@@ -74,7 +86,15 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Կառուցվածքը}
 \begin{center}
-    \includegraphics[scale=0.3]{structure.png}
+    \includegraphics[scale=0.4]{structure1.png}
+\end{center}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Կառուցվածքը}
+\begin{center}
+    \includegraphics[scale=0.4]{structure2.png}
 \end{center}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -83,21 +103,29 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Հետևանքները}
 Այս Ն.Ձ. ունի հետևյալ առավելություններն ու թերությունները.
-\vspace{0.5cm}
-\begin{itemize}
-    \item
-    \item
-\end{itemize}
+\vfill
+\begin{enumerate}
+    \scriptsize
+    \item Առանձնացնում է գործողության կանչն իրականացնող օբյեկտին այն օբյեկտից,
+    որը գիտի թե ինչպես գործողությունը կատարել: \pause \vfill
+    \item Քանի որ գործողությունը մոդելավորվում է սովորական օբյեկտի միջոցով,
+    այն կարելի է ղեկավարել և ընդլայնել այլ օբյեկտների նման: \pause \vfill
+    \item Հրամաններ կարելի է հավաքել կոմպոզիտ հրամանների մեջ: \pause \vfill
+    \item Նոր տիպի գործողությունների ավելացումը հեշտ է, քանի որ գոյություն ունեցող
+    գործողությունները փոփոխելու անհրաժեշտություն չկա:
+\end{enumerate}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
 
 \section{Իրականացումը}
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Իրականացումը}
-\begin{itemize}
-    \item
-    \item
-\end{itemize}
+\begin{enumerate}
+    \item Որքան խելացի պետք է լինի Command-ը: \vfill
+    \item Undo / Redo գործողությունների իրականացում: \vfill
+    \item Undo / Redo գործողությունների կատարման ժամանակ սխալի կուտակում: \vfill
+    \item C++-ի template-ների կիրառում:
+\end{enumerate}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
 
@@ -106,10 +134,134 @@
 \begin{frame}[fragile]\frametitle{Օրինակ}
 \begin{english}
 \begin{minted}{cpp}
-    class Graphic {
-        virtual void Draw(const Point& at) = 0;
-        virtual void HandleMouse(Event& event) = 0;
-    };
+class Command {
+
+public:
+    virtual ~Command();
+    virtual void Execute() = 0;
+
+protected:
+    Command();
+};
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}[fontsize=\scriptsize]{cpp}
+class OpenCommand : public Command {
+
+public:
+    OpenCommand(Application* a) : application(a) {}
+    virtual void Execute() {
+        const char* name = AskUser();
+        if (name == 0) return;
+
+        Document* document = new Document(name);
+        application->Add(document);
+        document->Open();
+    }
+
+protected:
+    virtual const char* AskUser();
+
+private:
+    Application* application;
+    char* response;
+};
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}{cpp}
+class PasteCommand : public Command {
+
+public:
+    PasteCommand(Document* d) : document(d) {}
+
+    void PasteCommand::Execute () {
+        document->Paste();
+    }
+
+private:
+    Document* document;
+};
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}{cpp}
+template <class Receiver>
+class SimpleCommand : public Command {
+
+public:
+    typedef void (Receiver::* Action) ();
+
+    SimpleCommand(Receiver* r, Action a)
+        : receiver(r), action(a) {}
+
+    virtual void Execute() {
+        (receiver->*action)();
+    }
+
+private:
+    Action action;
+    Receiver* receiver;
+};
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}{cpp}
+MyClass* receiver = new MyClass;
+
+Command* aCommand = new SimpleCommand<MyClass>(receiver,
+                                               &MyClass::Action);
+aCommand->Execute();
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}[fontsize=\scriptsize]{cpp}
+class MacroCommand : public Command {
+
+public:
+    MacroCommand();
+    virtual ~MacroCommand();
+
+    virtual void Add(Command* c) { cmds->Append(c); }
+    virtual void Remove(Command* c) { cmds->Remove(c); }
+
+    virtual void Execute() {
+        ListIterator<Command*> i(cmds);
+        for (i.First(); !i.IsDone(); i.Next()) {
+            Command* c = i.CurrentItem();
+            c->Execute();
+        }
+    }
+
+private:
+    List<Command*>* cmds;
+};
 \end{minted}
 \end{english}
 \end{frame}
@@ -119,8 +271,9 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Առնչվող Նախագծման Ձևանմուշները}
 \begin{itemize}
-    \item Adapter
-    \item Decorator
+    \item Composite \vfill
+    \item Memento \vfill
+    \item Prototype
 \end{itemize}
 \end{frame}
 %-------------------------------------------------------------------------------------------------

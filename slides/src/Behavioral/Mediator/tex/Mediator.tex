@@ -1,27 +1,5 @@
 \documentclass{beamer}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setbeamertemplate{navigation symbols}{}
-\usepackage{beamerthemeshadow}
-\usefonttheme{serif}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{graphicx}
-\graphicspath{ {res/} }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{polyglossia}
-\setdefaultlanguage{armenian}
-\setotherlanguages{english}
-\usepackage{fontspec}
-\newfontfamily\armenianfont{DejaVu Sans}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{minted}
-\setmonofont{Consolas}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{xltxtra}
-\usepackage{hyperref}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usetheme{Luebeck}
-\usecolortheme{crane}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{ArmenianSlides}
 
 \begin{document}
 
@@ -39,12 +17,16 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Mediator}
 \begin{block}{Նպատակը}
-    Տվյալ օբյեկտի համար տրամադրել այնպիսի փոխարինող, որը կվերահսկի նրան դիմումը:
+    Սահմանել օբյեկտ, որը կինկապսուլացնի այն,\\
+    թե ինչպես են փոխհամագործակցում մի խումբ օբյեկտներ: \\
+    Այս Ն.Ձ. նպաստում է փոխկապակցվածության թուլացմանը, կանխելով օբյեկտների
+    միմյանց ուղղակի հղվելու անհրաժեշտությունը և թույլ է տալիս անկախ կերպով փոփոխել
+    նրանցով փոխազդեցությունը:
 \end{block}
 \vfill
 Նաև հայտնի է որպես
 \begin{itemize}
-    \item Surrogate
+    \item Այլ լայնորեն կիրառվող անուներ չկան:
 \end{itemize}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -53,7 +35,31 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Մոտիվացիան}
 \begin{center}
-    \includegraphics[scale=0.3]{motivation.png}
+    \includegraphics[scale=0.4]{motivation1.png}
+\end{center}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Մոտիվացիան}
+\begin{center}
+    \includegraphics[scale=0.4]{motivation2.png}
+\end{center}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Մոտիվացիան}
+\begin{center}
+    \includegraphics[scale=0.4]{motivation3.png}
+\end{center}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Մոտիվացիան}
+\begin{center}
+    \includegraphics[scale=0.4]{motivation4.png}
 \end{center}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -62,11 +68,14 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Կիրառելիությունը}
 Այս Ն.Ձ. պետք է օգտագործել երբ.
-\vspace{0.5cm}
-\begin{itemize}
-    \item
-    \item
-\end{itemize}
+\vfill
+\begin{enumerate}
+    \item Մի խումբ օբյեկտներ փոխազդում են լավ սահմանված և կոմպլեքս ձևով: \vfill
+    \item Օբյեկտի վերօգտագործումը դժվար է նրա\\ շատ օբյեկտների հետ
+    փոխազդեցության հետևանքով: \vfill
+    \item Շատ օբյեկտների մեջ բաժանված վարվելակերպը պետք է փոփոխելի լինի
+    առանց մեծ քանակով ենթադասեր ստեղծելու:
+\end{enumerate}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
 
@@ -74,7 +83,14 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Կառուցվածքը}
 \begin{center}
-    \includegraphics[scale=0.3]{structure.png}
+    \includegraphics[scale=0.4]{structure1.png}
+\end{center}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Կառուցվածքը}
+\begin{center}
+    \includegraphics[scale=0.4]{structure2.png}
 \end{center}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -83,21 +99,24 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Հետևանքները}
 Այս Ն.Ձ. ունի հետևյալ առավելություններն ու թերությունները.
-\vspace{0.5cm}
-\begin{itemize}
-    \item
-    \item
-\end{itemize}
+\vfill
+\begin{enumerate}
+    \item Նվազեցնում է ժառանգության անհրաժեշտությունը: \vfill
+    \item Բաժանում է գործընկեր դասերին: \vfill
+    \item Պարզեցնում է օբյեկտների հաղորդակցումը: \vfill
+    \item Աբստրակտացնում է օբյեկտների փոխհամագործակցությունը: \vfill
+    \item Կենտրոնացնում է ղեկավարումը:
+\end{enumerate}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
 
 \section{Իրականացումը}
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Իրականացումը}
-\begin{itemize}
-    \item
-    \item
-\end{itemize}
+\begin{enumerate}
+    \item Աբստրակտ Mediator դասի բացակայություն: \vfill
+    \item Collegue-Mediator հաղորդակցություն:
+\end{enumerate}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
 
@@ -106,10 +125,173 @@
 \begin{frame}[fragile]\frametitle{Օրինակ}
 \begin{english}
 \begin{minted}{cpp}
-    class Graphic {
-        virtual void Draw(const Point& at) = 0;
-        virtual void HandleMouse(Event& event) = 0;
-    };
+class DialogDirector {
+
+public:
+    virtual ~DialogDirector();
+    virtual void ShowDialog();
+    virtual void WidgetChanged(Widget*) = 0;
+
+protected:
+    DialogDirector();
+    virtual void CreateWidgets() = 0;
+};
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}{cpp}
+class Widget {
+
+public:
+    Widget(DialogDirector*);
+    virtual void Changed();
+    virtual void HandleMouse(MouseEvent& event);
+
+private:
+    DialogDirector* director;
+};
+
+void Widget::Changed () {
+    director->WidgetChanged(this);
+}
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}{cpp}
+class ListBox : public Widget {
+
+public:
+    ListBox(DialogDirector*);
+
+    virtual const char* GetSelection();
+    virtual void SetList(List<char*>* listItems);
+    virtual void HandleMouse(MouseEvent& event);
+
+    // Other methods
+};
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}{cpp}
+class EntryField : public Widget {
+
+public:
+    EntryField(DialogDirector*);
+
+    virtual void SetText(const char* text);
+    virtual const char* GetText();
+    virtual void HandleMouse(MouseEvent& event);
+
+    // Other methods
+};
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}{cpp}
+class Button : public Widget {
+
+public:
+    Button(DialogDirector*);
+
+    virtual void SetText(const char* text);
+    virtual void HandleMouse(MouseEvent& event);
+
+    // Other methods
+};
+
+void Button::HandleMouse(MouseEvent& event) {
+    // Local event handling
+    Changed();
+}
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}{cpp}
+class FontDialogDirector : public DialogDirector {
+
+public:
+    FontDialogDirector();
+    virtual ~FontDialogDirector();
+    virtual void WidgetChanged(Widget*);
+
+protected:
+    virtual void CreateWidgets();
+
+private:
+    Button*     ok;
+    Button*     cancel;
+    ListBox*    fontList;
+    EntryField* fontName;
+};
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}{cpp}
+void FontDialogDirector::CreateWidgets () {
+
+    ok = new Button(this);
+    cancel = new Button(this);
+    fontList = new ListBox(this);
+    fontName = new EntryField(this);
+
+    // Fill the listBox with the available font names
+
+    // Assemble the widgets in the dialog
+}
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}{cpp}
+void FontDialogDirector::WidgetChanged(Widget* theChangedWidget) {
+
+    if (theChangedWidget == fontList) {
+
+        fontName->SetText(fontList->GetSelection());
+
+    } else if (theChangedWidget == ok) {
+
+        // apply font change and dismiss dialog
+
+    } else if (theChangedWidget == cancel) {
+
+        // dismiss dialog
+    }
+}
 \end{minted}
 \end{english}
 \end{frame}
@@ -119,8 +301,8 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Առնչվող Նախագծման Ձևանմուշները}
 \begin{itemize}
-    \item Adapter
-    \item Decorator
+    \item Facade \vfill
+    \item Observer
 \end{itemize}
 \end{frame}
 %-------------------------------------------------------------------------------------------------

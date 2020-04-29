@@ -1,27 +1,5 @@
 \documentclass{beamer}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setbeamertemplate{navigation symbols}{}
-\usepackage{beamerthemeshadow}
-\usefonttheme{serif}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{graphicx}
-\graphicspath{ {res/} }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{polyglossia}
-\setdefaultlanguage{armenian}
-\setotherlanguages{english}
-\usepackage{fontspec}
-\newfontfamily\armenianfont{DejaVu Sans}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{minted}
-\setmonofont{Consolas}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{xltxtra}
-\usepackage{hyperref}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usetheme{Luebeck}
-\usecolortheme{crane}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{ArmenianSlides}
 
 \begin{document}
 
@@ -39,12 +17,13 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Decorator}
 \begin{block}{Նպատակը}
-    Տվյալ օբյեկտի համար տրամադրել այնպիսի փոխարինող, որը կվերահսկի նրան դիմումը:
+    Օբյեկտին դինամիկ կերպով հավելյալ պատասխանատվություն է կցում: \\ Հանդիսանում է
+    ընդլայնման նպատակով ժառանգման առավել ճկուն այլընտրանք:
 \end{block}
 \vfill
 Նաև հայտնի է որպես
 \begin{itemize}
-    \item Surrogate
+    \item Wrapper
 \end{itemize}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -53,7 +32,16 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Մոտիվացիան}
 \begin{center}
-    \includegraphics[scale=0.3]{motivation.png}
+    \includegraphics[scale=0.4]{motivation1.png}
+    \includegraphics[scale=0.4]{motivation2.png}
+\end{center}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Մոտիվացիան}
+\begin{center}
+    \includegraphics[scale=0.4]{motivation3.png}
 \end{center}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -62,11 +50,21 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Կիրառելիությունը}
 Այս Ն.Ձ. պետք է օգտագործել երբ.
-\vspace{0.5cm}
-\begin{itemize}
-    \item
-    \item
-\end{itemize}
+\vfill
+\scriptsize
+\setbeamertemplate{itemize/enumerate subbody begin}{\scriptsize}
+\begin{enumerate}
+    \item Անհրաժեշտ է անհատական օբյեկտի դինամիկ և թափանցիկ կերպով
+    հավելյալ պատասխանատվություն տալ առանց մնացյալ օբյեկտների վրա ազդելու: \vfill
+    \item Անհրաժեշտ է օբյեկտի այնպիսի պատասխանատվություն տալ,
+    որը հնարավոր լինի չեղարկել: \vfill
+    \item Երբ ժառանգման միջոցով ընդլայնումը կիրառելի չէ. \vfill
+    \begin{itemize}
+        \item Երբ մեծ քանակով անկախ ընդլայնումների կարիք կա, բայց բոլոր կոմբինացիաների
+        համար ժառանգ դասերի ստեղծումը կբերի դասերի քանակի չափից ավել աճի: \vfill
+        \item Երբ դասի սահմանումը թաքնված է կամ հասանելի չէ ժառանգման համար:
+    \end{itemize}
+\end{enumerate}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
 
@@ -74,7 +72,7 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Կառուցվածքը}
 \begin{center}
-    \includegraphics[scale=0.3]{structure.png}
+    \includegraphics[scale=0.4]{structure.png}
 \end{center}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -83,33 +81,99 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Հետևանքները}
 Այս Ն.Ձ. ունի հետևյալ առավելություններն ու թերությունները.
-\vspace{0.5cm}
-\begin{itemize}
-    \item
-    \item
-\end{itemize}
+\vfill
+\begin{enumerate}
+    \item Առավել ճկուն է քան ստատիկ ժառանգումը: \pause \vfill
+    \item Խուսափում է հատկություններով հարուստ դասերի հիերարխիայով
+    վեր բարձրացումից: \pause \vfill
+    \item Դեկորատորը և նրա կոմպոնենտը միևնույն օբյեկտը չեն: \pause \vfill
+    \item Բերում է մեծ քանակով փոքր օբյեկտների ստեղծման:
+\end{enumerate}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
 
 \section{Իրականացումը}
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Իրականացումը}
-\begin{itemize}
-    \item
-    \item
-\end{itemize}
+\begin{enumerate}
+    \item Ինտերֆեյսի պահպանում: \vfill
+    \item Աբստրակտ դեկորատոր դասի բացակայություն: \vfill
+    \item Կոմպոնենտ դասերի պարզ (lightweight) իրականացում: \vfill
+    \item Օբյեկտի արտաքինի փոխարինումն ի տարբերություն օբյեկտի ներքինի փոխարինման:
+\end{enumerate}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
 
 \subsection{Օրինակ}
 %-------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Օրինակ}
+\begin{center}
+    \includegraphics[scale=0.4]{example.png}
+\end{center}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}[fontsize=\scriptsize]{cpp}
+class VisualComponent {
+
+public:
+    VisualComponent();
+    virtual void Draw();
+    virtual void Resize();
+};
+
+class Decorator : public VisualComponent {
+
+public:
+    Decorator(VisualComponent*);
+
+    virtual void Draw() { component->Draw(); }
+    virtual void Resize() { component->Resize(); }
+
+private:
+    VisualComponent* component;
+};
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
 \begin{frame}[fragile]\frametitle{Օրինակ}
 \begin{english}
 \begin{minted}{cpp}
-    class Graphic {
-        virtual void Draw(const Point& at) = 0;
-        virtual void HandleMouse(Event& event) = 0;
-    };
+class BorderDecorator : public Decorator {
+
+public:
+    BorderDecorator(VisualComponent*, int borderWidth);
+
+    virtual void Draw() {
+        Decorator::Draw();
+        DrawBorder(width);
+    }
+
+private:
+    void DrawBorder(int);
+    int width;
+};
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}{cpp}
+Window* window = new Window;
+
+TextView* textView = new TextView;
+
+window->SetContents( new BorderDecorator(
+                        new ScrollDecorator( textView ), 1) );
 \end{minted}
 \end{english}
 \end{frame}
@@ -119,8 +183,9 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Առնչվող Նախագծման Ձևանմուշները}
 \begin{itemize}
-    \item Adapter
-    \item Decorator
+    \item Adapter \vfill
+    \item Composite \vfill
+    \item Strategy
 \end{itemize}
 \end{frame}
 %-------------------------------------------------------------------------------------------------

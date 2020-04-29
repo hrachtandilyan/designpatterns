@@ -1,27 +1,5 @@
 \documentclass{beamer}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setbeamertemplate{navigation symbols}{}
-\usepackage{beamerthemeshadow}
-\usefonttheme{serif}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{graphicx}
-\graphicspath{ {res/} }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{polyglossia}
-\setdefaultlanguage{armenian}
-\setotherlanguages{english}
-\usepackage{fontspec}
-\newfontfamily\armenianfont{DejaVu Sans}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{minted}
-\setmonofont{Consolas}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{xltxtra}
-\usepackage{hyperref}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usetheme{Luebeck}
-\usecolortheme{crane}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{ArmenianSlides}
 
 \begin{document}
 
@@ -39,12 +17,13 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{AbstractFactory}
 \begin{block}{Նպատակը}
-    Տվյալ օբյեկտի համար տրամադրել այնպիսի փոխարինող, որը կվերահսկի նրան դիմումը:
+    Տրամադրում է ինտերֆեյս միմյանց հետ կապված կամ միմյանցից կախված օբյեկտների
+    ընտանիքներ ստեղծելու համար, առանց նշելու նրանց կոնկրետ տիպը:
 \end{block}
 \vfill
 Նաև հայտնի է որպես
 \begin{itemize}
-    \item Surrogate
+    \item Kit
 \end{itemize}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -53,7 +32,7 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Մոտիվացիան}
 \begin{center}
-    \includegraphics[scale=0.3]{motivation.png}
+    \includegraphics[scale=0.4]{motivation.png}
 \end{center}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -62,11 +41,15 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Կիրառելիությունը}
 Այս Ն.Ձ. պետք է օգտագործել երբ.
-\vspace{0.5cm}
-\begin{itemize}
-    \item
-    \item
-\end{itemize}
+\vfill
+\begin{enumerate}
+    \item Համակարգը պետք է անկախ լինի իր կոմպոնենտների ստեղծումից և ներկայացումից: \pause \vfill
+    \item Համակարգը պետք է աշխատի կոմպոնենտների բազմաթիվ ընտանիքներից միայն մեկի հետ: \pause \vfill
+    \item Անհրաժեշտ է ստիպել, որ միևնույն ընտանիքի կոմպոնենտներին համապատասխան
+    օբյեկտները աշխատեն միայն միմյանց հետ: \pause \vfill
+    \item Անհրաժեշտ է տրամադրել կոմպոնենտների դասերի գրադարան, այնպես որ բացահայտվի
+    միայն նրանց ինտերֆեյսը և ոչ թե իրականացումը:
+\end{enumerate}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
 
@@ -74,7 +57,7 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Կառուցվածքը}
 \begin{center}
-    \includegraphics[scale=0.3]{structure.png}
+    \includegraphics[scale=0.4]{structure.png}
 \end{center}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -83,21 +66,24 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Հետևանքները}
 Այս Ն.Ձ. ունի հետևյալ առավելություններն ու թերությունները.
-\vspace{0.5cm}
-\begin{itemize}
-    \item
-    \item
-\end{itemize}
+\vfill
+\begin{enumerate}
+    \item Առանձնացնում է կոնկրետ դասերը: \pause \vfill
+    \item Հեշտացնում է կոմպոնենտների ընտանիքների փոխարինումը: \pause \vfill
+    \item Ապահովում է կայունություն կոմպոնենտների միջև: \pause \vfill
+    \item Դժվարեցնում է նոր տիպի կոմպոնենտների ավելացումը:
+\end{enumerate}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
 
 \section{Իրականացումը}
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Իրականացումը}
-\begin{itemize}
-    \item
-    \item
-\end{itemize}
+\begin{enumerate}
+    \item Factory–ները որպես Singleton: \pause \vfill
+    \item Կոմպոնենտների ստեղծումը: \pause \vfill
+    \item Ընդլայնելի Factory-ների ստեղծումը:
+\end{enumerate}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
 
@@ -106,10 +92,100 @@
 \begin{frame}[fragile]\frametitle{Օրինակ}
 \begin{english}
 \begin{minted}{cpp}
-    class Graphic {
-        virtual void Draw(const Point& at) = 0;
-        virtual void HandleMouse(Event& event) = 0;
-    };
+class MazeFactory {
+
+public:
+    MazeFactory();
+
+    virtual Maze* MakeMaze() const { return new Maze; }
+
+    virtual Wall* MakeWall() const { return new Wall; }
+
+    virtual Room* MakeRoom(int n) const { return new Room(n); }
+
+    virtual Door* MakeDoor(Room* r1, Room* r2) const {
+        return new Door(r1, r2);
+    }
+};
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}[fontsize=\scriptsize]{cpp}
+Maze* MazeGame::CreateMaze(MazeFactory& factory) {
+    Maze* aMaze = factory.MakeMaze();
+
+    Room* r1 = factory.MakeRoom(1);
+    Room* r2 = factory.MakeRoom(2);
+    aMaze->AddRoom(r1); aMaze->AddRoom(r2);
+
+    Door* aDoor = factory.MakeDoor(r1, r2);
+    r1->SetSide(East, aDoor); r2->SetSide(West, aDoor);
+
+    r1->SetSide(North, factory.MakeWall());
+    r1->SetSide(South, factory.MakeWall());
+    r1->SetSide(West, factory.MakeWall());
+    r2->SetSide(North, factory.MakeWall());
+    r2->SetSide(East, factory.MakeWall());
+    r2->SetSide(South, factory.MakeWall());
+
+    return aMaze;
+}
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}{cpp}
+class EnchantedMazeFactory : public MazeFactory {
+
+public:
+    EnchantedMazeFactory();
+
+    virtual Room* MakeRoom(int n) const {
+        return new EnchantedRoom(n, CastSpell());
+    }
+
+    virtual Door* MakeDoor(Room* r1, Room* r2) const {
+        return new DoorNeedingSpell(r1, r2);
+    }
+
+protected:
+    Spell* CastSpell() const;
+};
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}{cpp}
+class BombedMazeFactory : public MazeFactory {
+
+public:
+    BombedMazeFactory();
+
+    virtual Room* MakeRoom(int n) const {
+        return new RoomWithABomb(n);
+    }
+
+    Wall* MakeWall () const {
+        return new BombedWall;
+    }
+};
+
+MazeGame game;
+BombedMazeFactory factory;
+game.CreateMaze(factory);
 \end{minted}
 \end{english}
 \end{frame}
@@ -119,8 +195,9 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Առնչվող Նախագծման Ձևանմուշները}
 \begin{itemize}
-    \item Adapter
-    \item Decorator
+    \item Factory Method \vfill
+    \item Prototype \vfill
+    \item Singleton
 \end{itemize}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
