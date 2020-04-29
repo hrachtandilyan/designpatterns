@@ -7,8 +7,6 @@ function update_pattern
     cd $PATTERN_NAME
     pwd
     #sed -i "" "s/Proxy/${PATTERN_NAME}/g" tex/$PATTERN_NAME.tex
-    rm Makefile
-    ln -s ../../../Makefile 
     make clean
     make slides
     cp $PATTERN_NAME.pdf ../../../pdf/$PATTERN_TYPE
