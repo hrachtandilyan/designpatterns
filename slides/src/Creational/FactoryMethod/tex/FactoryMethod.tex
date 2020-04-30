@@ -126,7 +126,8 @@
 \begin{english}
 \begin{minted}{cpp}
 class Creator {
-    public:
+
+public:
     virtual Product* Create(ProductId);
 };
 
@@ -180,7 +181,8 @@ Product* MyCreator::Create(ProductId id) {
 \begin{english}
 \begin{minted}{cpp}
 class Creator {
-    public:
+
+public:
     Product* GetProduct() {
         if (product == 0) {
             product = CreateProduct();
@@ -188,10 +190,10 @@ class Creator {
         return product;
     }
 
-    protected:
+protected:
     virtual Product* CreateProduct();
 
-    private:
+private:
     Product* product;
 };
 \end{minted}
@@ -215,18 +217,18 @@ class Creator {
 \begin{english}
 \begin{minted}[fontsize=\scriptsize]{cpp}
 class Creator {
-    public:
+public:
     virtual Product* CreateProduct() = 0;
 };
 
 template <class TheProduct>
 class StandardCreator: public Creator {
-    public:
+public:
     virtual Product* CreateProduct() () { return new TheProduct; }
 };
 
 class MyProduct : public Product {
-    public:
+public:
     MyProduct();
 };
 
@@ -254,7 +256,8 @@ StandardCreator<MyProduct> myCreator;
 \begin{english}
 \begin{minted}{cpp}
 class MazeGame {
-    public:
+
+public:
     Maze* CreateMaze();
 
     virtual Maze* MakeMaze() const { return new Maze; }
@@ -305,7 +308,8 @@ Maze* MazeGame::CreateMaze() {
 \begin{english}
 \begin{minted}{cpp}
 class EnchantedMazeGame : public MazeGame {
-    public:
+
+public:
     EnchantedMazeGame();
 
     virtual Room* MakeRoom(int n) const {
@@ -316,7 +320,7 @@ class EnchantedMazeGame : public MazeGame {
         return new DoorNeedingSpell(r1, r2);
     }
 
-    protected:
+protected:
     Spell* CastSpell() const;
 };
 \end{minted}
@@ -329,7 +333,8 @@ class EnchantedMazeGame : public MazeGame {
 \begin{english}
 \begin{minted}{cpp}
 class BombedMazeGame : public MazeGame {
-    public:
+
+public:
     BombedMazeGame();
 
     virtual Room* MakeRoom(int n) const {

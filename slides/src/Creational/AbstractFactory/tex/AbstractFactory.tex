@@ -129,7 +129,8 @@
 \begin{english}
 \begin{minted}{cpp}
 class MazeFactory {
-    public:
+
+public:
     MazeFactory();
 
     virtual Maze* MakeMaze() const { return new Maze; }
@@ -180,7 +181,8 @@ Maze* MazeGame::CreateMaze(MazeFactory& factory) {
 \begin{english}
 \begin{minted}{cpp}
 class EnchantedMazeFactory : public MazeFactory {
-    public:
+
+public:
     EnchantedMazeFactory();
 
     virtual Room* MakeRoom(int n) const {
@@ -191,7 +193,7 @@ class EnchantedMazeFactory : public MazeFactory {
         return new DoorNeedingSpell(r1, r2);
     }
 
-    protected:
+protected:
     Spell* CastSpell() const;
 };
 \end{minted}
@@ -204,7 +206,8 @@ class EnchantedMazeFactory : public MazeFactory {
 \begin{english}
 \begin{minted}{cpp}
 class BombedMazeFactory : public MazeFactory {
-    public:
+
+public:
     BombedMazeFactory();
 
     virtual Room* MakeRoom(int n) const {
