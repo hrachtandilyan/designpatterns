@@ -53,12 +53,13 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Builder}
 \begin{block}{Նպատակը}
-
+    Առանձնացնում է կոմպլեքս օբյեկտի կառուցումը նրա ներկայացումից այնպես,
+    որ միևնույն կառուցման պրոցեսը հնարավոր լինի կիրառել տարբեր օբյեկտներ ստեղծելու համար:
 \end{block}
 \vfill
 Նաև հայտնի է որպես
 \begin{itemize}
-    \item 
+    \item Այլ լայնորեն կիրառվող անուներ չկան:
 \end{itemize}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -67,7 +68,7 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Մոտիվացիան}
 \begin{center}
-    \includegraphics[scale=0.3]{motivation.png}
+    \includegraphics[scale=0.4]{motivation.png}
 \end{center}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -78,8 +79,9 @@
 Այս Ն.Ձ. պետք է օգտագործել երբ.
 \vfill
 \begin{enumerate}
-    \item  \pause \vfill
-    \item
+    \item Կոմպլեքս օբյեկտ ստեղծելու ալգորիթմը պետք է անկախ լինի կառուցվելիք
+    օբյեկտի մասերից, դրանց միավորման ձևից: \pause \vfill
+    \item Կառուցման պրոցեսը պետք է թույլ տա կառուցվող օբյեկտի տարբեր ներկայացումներ:
 \end{enumerate}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -88,7 +90,15 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Կառուցվածքը}
 \begin{center}
-    \includegraphics[scale=0.3]{structure.png}
+    \includegraphics[scale=0.4]{structure.png}
+\end{center}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Փոխհամագործակցությունը}
+\begin{center}
+    \includegraphics[scale=0.4]{collaborations.png}
 \end{center}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -99,8 +109,9 @@
 Այս Ն.Ձ. ունի հետևյալ առավելություններն ու թերությունները.
 \vfill
 \begin{enumerate}
-    \item  \pause \vfill
-    \item
+    \item Թույլ է տալիս հեշտորեն փոփոխել օբյեկտների ներքին ներկայացումը: \pause \vfill
+    \item Առանձնացնում է օբյեկտի կառուցման և ներկայացման կոդերը: \pause \vfill
+    \item Տալիս է կառուցման պրոցեսի ավելի լավ ղեկավարման հնարավորություն:
 \end{enumerate}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -109,8 +120,9 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Իրականացումը}
 \begin{enumerate}
-    \item \vfill
-    \item
+    \item Կառուցման և միավորման ինտերֆեյս: \pause \vfill
+    \item Ինչու ստեղծվելիք օբյեկտների համար աբստրակտ բազային դաս չի կիրառվում: \pause \vfill
+    \item Դատարկ մեթոդներ աբստրակտ մեթոդների փոխարեն:
 \end{enumerate}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -120,9 +132,196 @@
 \begin{frame}[fragile]\frametitle{Օրինակ}
 \begin{english}
 \begin{minted}{cpp}
-class Graphic {
-    virtual void Draw(const Point& at) = 0;
-    virtual void HandleMouse(Event& event) = 0;
+class MazeBuilder {
+
+public:
+    virtual void BuildMaze() { }
+
+    virtual void BuildRoom(int room) { }
+
+    virtual void BuildDoor(int roomFrom, int roomTo) { }
+
+    virtual Maze* GetMaze() { return 0; }
+
+protected:
+    MazeBuilder();
+};
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}{cpp}
+Maze* MazeGame::CreateMaze(MazeBuilder& builder) {
+
+    builder.BuildMaze();
+
+    builder.BuildRoom(1);
+
+    builder.BuildRoom(2);
+
+    builder.BuildDoor(1, 2);
+
+    return builder.GetMaze();
+}
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+    \begin{minted}[fontsize=\scriptsize]{cpp}
+        Maze* MazeGame::CreateMaze(MazeFactory& factory) {
+            Maze* aMaze = factory.MakeMaze();
+
+            Room* r1 = factory.MakeRoom(1);
+            Room* r2 = factory.MakeRoom(2);
+            aMaze->AddRoom(r1); aMaze->AddRoom(r2);
+
+            Door* aDoor = factory.MakeDoor(r1, r2);
+            r1->SetSide(East, aDoor); r2->SetSide(West, aDoor);
+
+            r1->SetSide(North, factory.MakeWall());
+            r1->SetSide(South, factory.MakeWall());
+            r1->SetSide(West, factory.MakeWall());
+            r2->SetSide(North, factory.MakeWall());
+            r2->SetSide(East, factory.MakeWall());
+            r2->SetSide(South, factory.MakeWall());
+
+            return aMaze;
+        }
+    \end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}{cpp}
+class StandardMazeBuilder : public MazeBuilder {
+
+public:
+    StandardMazeBuilder() { currentMaze_= NULL; }
+
+    virtual void BuildMaze() { currentMaze_= new Maze; }
+
+    virtual void BuildRoom(int);
+
+    virtual void BuildDoor(int, int);
+
+    virtual Maze* GetMaze() { return currentMaze_; }
+
+private:
+    Direction CommonWall(Room*, Room*);
+    Maze* currentMaze_;
+};
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}[fontsize=\scriptsize]{cpp}
+void StandardMazeBuilder::BuildRoom(int n) {
+    if (currentMaze_->RoomNo(n)) return;
+
+    Room* room = new Room(n);
+    currentMaze_->AddRoom(room);
+
+    room->SetSide(North, new Wall); room->SetSide(South, new Wall);
+    room->SetSide(East, new Wall); room->SetSide(West, new Wall);
+}
+
+void StandardMazeBuilder::BuildDoor(int n1, int n2) {
+    Room* r1 = currentMaze_->RoomNo(n1);
+    Room* r2 = currentMaze_->RoomNo(n2);
+
+    Door* d = new Door(r1, r2);
+
+    r1->SetSide(CommonWall(r1,r2), d);
+    r2->SetSide(CommonWall(r2,r1), d);
+}
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}{cpp}
+Maze* maze;
+MazeGame game;
+StandardMazeBuilder builder;
+game.CreateMaze(builder);
+maze = builder.GetMaze();
+
+
+Maze* maze;
+MazeGame game;
+StandardMazeFactory factory;
+maze = game.CreateMaze(factory);
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}{cpp}
+Maze* MazeGame::CreateComplexMaze(MazeBuilder& builder) {
+
+    builder.BuildRoom(1);
+
+    builder.BuildRoom(2);
+
+    // ...
+
+    builder.BuildRoom(1001);
+
+    builder.BuildDoor(i1, i2);
+
+    // ...
+
+    return builder.GetMaze();
+}
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}[fontsize=\scriptsize]{cpp}
+class CountingMazeBuilder : public MazeBuilder {
+
+public:
+    CountingMazeBuilder(): doors_(0), rooms_(0) {}
+
+    virtual void BuildMaze() { doors_ = rooms_ = 0;}
+
+    virtual void BuildRoom(int) { ++rooms_;}
+
+    virtual void BuildDoor(int, int) { ++doors_;}
+
+    virtual void AddWall(int, Direction){}
+
+    void GetCounts(int& doors, int& rooms) const {
+        doors = doors_;  rooms = rooms_;
+    }
+
+private:
+    int doors_; int rooms_;
 };
 \end{minted}
 \end{english}
@@ -133,8 +332,7 @@ class Graphic {
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Առնչվող Նախագծման Ձևանմուշները}
 \begin{itemize}
-    \item \vfill 
-    \item 
+    \item Composite
 \end{itemize}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
