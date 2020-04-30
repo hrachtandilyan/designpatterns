@@ -137,7 +137,8 @@
 \begin{english}
 \begin{minted}{cpp}
 class MazePrototypeFactory : public MazeFactory {
-    public:
+
+public:
     MazePrototypeFactory(Maze*, Wall*, Room*, Door*);
 
     virtual Maze* MakeMaze() const;
@@ -148,7 +149,7 @@ class MazePrototypeFactory : public MazeFactory {
 
     virtual Door* MakeDoor(Room*, Room*) const;
 
-    private:
+private:
     Maze* prototypeMaze; Room* prototypeRoom;
     Wall* prototypeWall; Door* prototypeDoor;
 };
@@ -209,7 +210,8 @@ Maze* maze = game.CreateMaze(bombedMazeFactor);
 \begin{english}
 \begin{minted}[fontsize=\scriptsize]{cpp}
 class Door : public MapSite {
-    public:
+
+public:
     Door();
 
     Door(const Door& other) ) {
@@ -223,9 +225,8 @@ class Door : public MapSite {
     virtual Door* Clone() const { return new Door(*this);}
 
     virtual void Enter();
-    Room* OtherSideFrom(Room*);
 
-    private:
+private:
     Room* room1; Room* room2;
 };
 \end{minted}
