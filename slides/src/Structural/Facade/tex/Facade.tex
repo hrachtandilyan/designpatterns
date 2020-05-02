@@ -53,12 +53,13 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Facade}
 \begin{block}{Նպատակը}
-
+    Ապահովել ունիֆիկացված ինտերֆեյս ենթահամակարգի ինտերֆեյսների բազմության համար:
+    Սահմանում է բարձր մակարդակի ինտերֆեյս` ենթահամակարգը ավելի հեշտ օգտագործելու համար:
 \end{block}
 \vfill
 Նաև հայտնի է որպես
 \begin{itemize}
-    \item 
+    \item Այլ լայնորեն կիրառվող անուներ չկան:
 \end{itemize}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -67,7 +68,15 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Մոտիվացիան}
 \begin{center}
-    \includegraphics[scale=0.3]{motivation.png}
+    \includegraphics[scale=0.4]{motivation1.png}
+\end{center}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Մոտիվացիան}
+\begin{center}
+    \includegraphics[scale=0.4]{motivation2.png}
 \end{center}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -78,8 +87,11 @@
 Այս Ն.Ձ. պետք է օգտագործել երբ.
 \vfill
 \begin{enumerate}
-    \item  \pause \vfill
-    \item
+    \item Ցանկանում եք տրամադրել պարզ ինտերֆեյս կոմպլեքս ենթահամակարգի
+    հետ աշխատելու համար: \pause \vfill
+    \item Ցանկանում եք նվազեցնել ենթահամակարգի կախվածությունը օգտագործողից
+    և այլ ենթահամակարգերից: \pause \vfill
+    \item Ցանկանում եք շերտավորել ձեր ենթահամակարգերը:
 \end{enumerate}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -88,7 +100,7 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Կառուցվածքը}
 \begin{center}
-    \includegraphics[scale=0.3]{structure.png}
+    \includegraphics[scale=0.4]{structure.png}
 \end{center}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -99,8 +111,13 @@
 Այս Ն.Ձ. ունի հետևյալ առավելություններն ու թերությունները.
 \vfill
 \begin{enumerate}
-    \item  \pause \vfill
-    \item
+    \item Նվազեցնում է այն օբյեկտների քանակը, որոնց հետ առնչվում է օգտագործողը,
+    դարձնելով ենթահամակարգը հեշտ օգտագործելի: \pause \vfill
+    \item Նվազեցնում է ենթահամակարգի կախվածությունը օգտագործողից և այլ
+    ենթահամակարգերից: \pause \vfill
+    \item Չի խոչդոտում օգտագործողի կողմից ենթահամակարգի դասերի օգտագործմանը
+    (եթե դրա կարիքը կա): Այսինքն օգտագործողը կարող է որոշել ինչն է իրեն անհրաժեշտ
+    ընդհանրությունը, թե պարզությունը:
 \end{enumerate}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -109,8 +126,8 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Իրականացումը}
 \begin{enumerate}
-    \item \vfill
-    \item
+    \item Հաճախորդներ-ենթահամակարգ կապերի կրճատում: \vfill
+    \item public ենթահամակարգային դասերը ընդդեմ  private ենթահամակարգային դասերի:
 \end{enumerate}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -120,9 +137,42 @@
 \begin{frame}[fragile]\frametitle{Օրինակ}
 \begin{english}
 \begin{minted}{cpp}
-class Graphic {
-    virtual void Draw(const Point& at) = 0;
-    virtual void HandleMouse(Event& event) = 0;
+Scanner scanner(input);
+
+ProgramNodeBuilder builder;
+
+Parser parser;
+
+parser.Parse(scanner, builder);
+
+RISCCodeGenerator generator(output);
+
+ProgramNode* parseTree = builder.GetRootNode();
+
+parseTree->Traverse(generator);
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}{cpp}
+class Compiler {
+
+public:
+    Compiler();
+
+    virtual void Compile(istream& input, BytecodeStream& output) {
+
+        Scanner scanner(input);
+        ProgramNodeBuilder builder;
+        Parser parser;
+        parser.Parse(scanner, builder);
+        RISCCodeGenerator generator(output);
+        ProgramNode* parseTree = builder.GetRootNode();
+        parseTree->Traverse(generator);
+    }
 };
 \end{minted}
 \end{english}
@@ -133,8 +183,9 @@ class Graphic {
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Առնչվող Նախագծման Ձևանմուշները}
 \begin{itemize}
-    \item \vfill 
-    \item 
+    \item Abstract Factory \vfill
+    \item Mediator \vfill
+    \item Singleton
 \end{itemize}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
