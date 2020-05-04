@@ -53,12 +53,13 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Decorator}
 \begin{block}{Նպատակը}
-
+    Օբյեկտին դինամիկ կերպով հավելյալ պատասխանատվություն է կցում: \\ Հանդիսանում է
+    ընդլայնման նպատակով ժառանգման առավել ճկուն այլընտրանք:
 \end{block}
 \vfill
 Նաև հայտնի է որպես
 \begin{itemize}
-    \item 
+    \item Wrapper
 \end{itemize}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -67,7 +68,16 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Մոտիվացիան}
 \begin{center}
-    \includegraphics[scale=0.3]{motivation.png}
+    \includegraphics[scale=0.4]{motivation1.png}
+    \includegraphics[scale=0.4]{motivation2.png}
+\end{center}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Մոտիվացիան}
+\begin{center}
+    \includegraphics[scale=0.4]{motivation3.png}
 \end{center}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -77,9 +87,19 @@
 \begin{frame}\frametitle{Կիրառելիությունը}
 Այս Ն.Ձ. պետք է օգտագործել երբ.
 \vfill
+\scriptsize
+\setbeamertemplate{itemize/enumerate subbody begin}{\scriptsize}
 \begin{enumerate}
-    \item  \pause \vfill
-    \item
+    \item Անհրաժեշտ է անհատական օբյեկտի դինամիկ և թափանցիկ կերպով
+    հավելյալ պատասխանատվություն տալ առանց մնացյալ օբյեկտների վրա ազդելու: \vfill
+    \item Անհրաժեշտ է օբյեկտի այնպիսի պատասխանատվություն տալ,
+    որը հնարավոր լինի չեղարկել: \vfill
+    \item Երբ ժառանգման միջոցով ընդլայնումը կիրառելի չէ. \vfill
+    \begin{itemize}
+        \item Երբ մեծ քանակով անկախ ընդլայնումների կարիք կա, բայց բոլոր կոմբինացիաների
+        համար ժառանգ դասերի ստեղծումը կբերի դասերի քանակի չափից ավել աճի: \vfill
+        \item Երբ դասի սահմանումը թաքնված է կամ հասանելի չէ ժառանգման համար:
+    \end{itemize}
 \end{enumerate}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -88,7 +108,7 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Կառուցվածքը}
 \begin{center}
-    \includegraphics[scale=0.3]{structure.png}
+    \includegraphics[scale=0.4]{structure.png}
 \end{center}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -99,8 +119,11 @@
 Այս Ն.Ձ. ունի հետևյալ առավելություններն ու թերությունները.
 \vfill
 \begin{enumerate}
-    \item  \pause \vfill
-    \item
+    \item Առավել ճկուն է քան ստատիկ ժառանգումը: \pause \vfill
+    \item Խուսափում է հատկություններով հարուստ դասերի հիերարխիայով
+    վեր բարձրացումից: \pause \vfill
+    \item Դեկորատորը և նրա կոմպոնենտը միևնույն օբյեկտը չեն: \pause \vfill
+    \item Բերում է մեծ քանակով փոքր օբյեկտների ստեղծման:
 \end{enumerate}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
@@ -109,21 +132,84 @@
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Իրականացումը}
 \begin{enumerate}
-    \item \vfill
-    \item
+    \item Ինտերֆեյսի պահպանում: \vfill
+    \item Աբստրակտ դեկորատոր դասի բացակայություն: \vfill
+    \item Կոմպոնենտ դասերի պարզ (lightweight) իրականացում: \vfill
+    \item Օբյեկտի արտաքինի փոխարինումն ի տարբերություն օբյեկտի ներքինի փոխարինման:
 \end{enumerate}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
 
 \subsection{Օրինակ}
 %-------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Օրինակ}
+\begin{center}
+    \includegraphics[scale=0.4]{example.png}
+\end{center}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}[fontsize=\scriptsize]{cpp}
+class VisualComponent {
+
+public:
+    VisualComponent();
+    virtual void Draw();
+    virtual void Resize();
+};
+
+class Decorator : public VisualComponent {
+
+public:
+    Decorator(VisualComponent*);
+
+    virtual void Draw() { component->Draw(); }
+    virtual void Resize() { component->Resize(); }
+
+private:
+    VisualComponent* component;
+};
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
 \begin{frame}[fragile]\frametitle{Օրինակ}
 \begin{english}
 \begin{minted}{cpp}
-class Graphic {
-    virtual void Draw(const Point& at) = 0;
-    virtual void HandleMouse(Event& event) = 0;
+class BorderDecorator : public Decorator {
+
+public:
+    BorderDecorator(VisualComponent*, int borderWidth);
+
+    virtual void Draw() {
+        Decorator::Draw();
+        DrawBorder(width);
+    }
+
+private:
+    void DrawBorder(int);
+    int width;
 };
+\end{minted}
+\end{english}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]\frametitle{Օրինակ}
+\begin{english}
+\begin{minted}{cpp}
+Window* window = new Window;
+
+TextView* textView = new TextView;
+
+window->SetContents( new BorderDecorator(
+                        new ScrollDecorator( textView ), 1) );
 \end{minted}
 \end{english}
 \end{frame}
@@ -133,8 +219,9 @@ class Graphic {
 %-------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Առնչվող Նախագծման Ձևանմուշները}
 \begin{itemize}
-    \item \vfill 
-    \item 
+    \item Adapter \vfill
+    \item Composite \vfill
+    \item Strategy
 \end{itemize}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
