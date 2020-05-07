@@ -16,6 +16,9 @@ Script also can be modified to batch edit all pattern tex files etc.
 `Makefile` in the slides root directory shouldn't be directly used.
 It is a generic makefile, and is soft linked into all specific pattern folders.
 
+`ArmenianSlides.sty` tex styles file contains all common styling settings.
+It is also soft linked into all specific patterns folders and used by each one.
+
 
 ## Working with specific pattern slides
 
@@ -27,6 +30,7 @@ Each pattern specific folder has following structure:
 
 ```
 .
+├── ArmenianSlides.sty -> ../../../ArmenianSlides.sty
 ├── Makefile -> ../../../Makefile
 ├── res
 │   ├── ...
