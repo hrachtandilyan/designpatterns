@@ -11,5 +11,5 @@ slides: $(SLIDES_SRC)
 
 clean:	
 
-	@-rm -rf *.* 
+	@-rm -rf *.aux *.log *.nav *. *.out *.pdf *.snm *.toc *.vrb
 	@-rm -rf _* 
