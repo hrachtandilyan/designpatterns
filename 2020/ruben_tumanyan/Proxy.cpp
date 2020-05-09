@@ -4,7 +4,7 @@
 class Account_Interface
 {
 public:
-	virtual void cashŒut() = 0;
+	virtual void cash√éut() = 0;
 	virtual ~Account_Interface() {}
 };
 
@@ -12,7 +12,7 @@ class BankAccount : public Account_Interface
 {
 public:
 	BankAccount() {}
-	void cashŒut() override
+	void cash√éut() override
 	{
 		std::cout <<  "You've withdrawed 50 dollars\n";
 	}
@@ -23,10 +23,10 @@ class AccountProxy : public Account_Interface
 public:
 	AccountProxy(BankAccount& b) : bank_(b), pswd_("hello"), active(false) {}
 	
-	void cashŒut() override
+	void cash√éut() override
 	{
 		if (active)
-			bank_.cashŒut();
+			bank_.cash√éut();
 		else
 			std::cout << "Please authorize\n";
 	}
@@ -46,13 +46,13 @@ private:
 
 int main()
 {
-	BankAccount bank;
+	BankAccount acc;
 
-	AccountProxy proxy (bank);
-	proxy.cashŒut();
+	AccountProxy proxy (acc);
+	proxy.cash√éut();
 	proxy.authorize("123");
 	proxy.authorize("hello");
-	proxy.cashŒut();
+	proxy.cash√éut();
 
 	return 0;
 }
