@@ -158,7 +158,7 @@ public:
     OpenCommand(Application* a) : application(a) {}
     virtual void Execute() {
         const char* name = AskUser();
-        if (name != 0) return;
+        if (name == 0) return;
 
         Document* document = new Document(name);
         application->Add(document);
@@ -184,7 +184,7 @@ private:
 class PasteCommand : public Command {
 
 public:
-    PasteCommand(Document*) document(doc) {}
+    PasteCommand(Document* d) : document(d) {}
 
     void PasteCommand::Execute () {
         document->Paste();
@@ -248,8 +248,8 @@ public:
     MacroCommand();
     virtual ~MacroCommand();
 
-    virtual void Add(Command*) { cmds->Append(c); }
-    virtual void Remove(Command*) { cmds->Remove(c); }
+    virtual void Add(Command* c) { cmds->Append(c); }
+    virtual void Remove(Command* c) { cmds->Remove(c); }
 
     virtual void Execute() {
         ListIterator<Command*> i(cmds);
