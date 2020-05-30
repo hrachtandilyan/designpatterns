@@ -7,7 +7,7 @@ import factorymethod.util.State;
 
 import java.util.Arrays;
 
-public class Demo {
+public class FactoryMethodDemo {
 
     public static void main(String[] args) {
         Bot bot1 = new SmartBot(new State(50, 60, Arrays.asList("Magic Wand", "Gun")));
