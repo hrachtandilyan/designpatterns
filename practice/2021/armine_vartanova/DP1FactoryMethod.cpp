@@ -1,9 +1,8 @@
 #include <iostream>
-#include <string>
-#include <set>
-#include <typeinfo>
+#include <map>
 using namespace std;
 
+//Base product class
 class Armor {
 protected: int defence;
 public:
@@ -14,7 +13,8 @@ public:
 protected:
     void setDefence();
 };
-//Armor types
+
+//Base product types (subclasses)
 class Gauntlets : public Armor
 {
    void setDefence(){
@@ -39,7 +39,8 @@ class Boots : public Armor
         defence = 30;
      }
 };
-//Dragonbone armor types
+
+//Dragonbone armor
 class DragonboneGauntlets : public Gauntlets {
     void setDefence(){
         defence = 20;
@@ -63,14 +64,15 @@ class DragonboneBoots : public Boots {
 
 enum ArmorPiece { HEADGEAR, BOOTS, CUIRASS, GAUNTLETS };
 
+//set of products a character can acquire
 class Equipment {
-private: set<ArmorPiece> _equipment;
+private: map<ArmorPiece,Armor*> _equipment;
 public:
     void AddGauntlets(Gauntlets* g)
     {
         if (_equipment.find(GAUNTLETS) == _equipment.end())
         {
-        _equipment.insert(GAUNTLETS);
+            _equipment.insert({GAUNTLETS,g});
         }
     }
     
@@ -78,7 +80,7 @@ public:
     {
         if (_equipment.find(CUIRASS) == _equipment.end())
         {
-        _equipment.insert(CUIRASS);
+            _equipment.insert({CUIRASS,c});
         }
     }
     
@@ -86,7 +88,7 @@ public:
     {
         if (_equipment.find(HEADGEAR) == _equipment.end())
         {
-        _equipment.insert(HEADGEAR);
+            _equipment.insert({HEADGEAR,h});
         }
     }
     
@@ -94,13 +96,13 @@ public:
     {
         if (_equipment.find(BOOTS) == _equipment.end())
         {
-        _equipment.insert(BOOTS);
+            _equipment.insert({BOOTS,b});
         }
     }
 };
 
 //Creator
-class ArmorEquip {
+class EquipArmor {
     public:
     Equipment* CreateEquipment();
     
@@ -121,7 +123,7 @@ class ArmorEquip {
         return new Boots; }
 };
 
-Equipment* ArmorEquip::CreateEquipment () {
+Equipment* EquipArmor::CreateEquipment () {
     Equipment* equipment = MakeEquipment();
     Gauntlets* gauntlets = MakeGauntlets();
     Headgear* headgear = MakeHeadgear();
@@ -135,9 +137,8 @@ Equipment* ArmorEquip::CreateEquipment () {
     return equipment;
 }
 
-class DragonboneArmorEquip : public ArmorEquip {
+class EquipDragonboneArmor : public EquipArmor {
     public:
-   // DragonboneArmorEquip(){};
     virtual Gauntlets* MakeGauntlets() const
     {
         cout<<"Dragonbone gauntlets created."<<endl;
@@ -161,6 +162,6 @@ class DragonboneArmorEquip : public ArmorEquip {
 };
 
 int main() {
- ArmorEquip* eq = new ArmorEquip();
+ EquipArmor* eq = new EquipArmor(); //swap to EquipDragonboneArmor() to see changes
  eq->CreateEquipment();
 }
