@@ -2,17 +2,17 @@
 #include <math.h>
 using namespace std;
 
-class Geometry
+class Shape
 {
 public:
-	Geometry() {}
+	Shape() {}
 	virtual double getPerimeter() = 0;
 	virtual double getArea() = 0;
 };
-class Triangle : public Geometry
+class Triangle : public Shape
 {
 public:
-	Triangle(double _side1, double _side2, double _side3) {
+	Triangle(double _side1 = 3, double _side2 = 4, double _side3 = 5) {
 		side1 = _side1;
 		side2 = _side2;
 		side3 = _side3;
@@ -28,10 +28,10 @@ private:
 	double side1, side2, side3;
 };
 
-class Square : public Geometry
+class Square : public Shape
 {
 public:
-	Square(double a) {
+	Square(double a = 4) {
 		side = a;
 	}
 	double getPerimeter() {
@@ -47,10 +47,10 @@ private:
 	double side;
 };
 
-class Rectangle : public Geometry
+class Rectangle : public Shape
 {
 public:
-	Rectangle(double a, double b) {
+	Rectangle(double a = 2, double b = 6) {
 		width = a;
 		length = b;
 	}
@@ -64,31 +64,38 @@ private:
 	double width, length;
 };
 
-class Shape
+class ShapeFactory
 {
 public:
-	Shape(double a) {
-		//square
-		geometry = new Square(a);
-	}
-	Shape(double a, double b) {
-		//rectangle
-		geometry = new Rectangle(a,b);
-	}
-	Shape(double a, double b, double c) {
-		//triangle
-		geometry = new Triangle(a,b,c);
-	}
-	Geometry* geometry;
+	virtual Shape* createShape() = 0;
+};
+
+class SquareClient : public ShapeFactory
+{
+public:
+	Shape* createShape() { return new Square; }
+};
+
+class TriangleClient : public ShapeFactory
+{
+public:
+	Shape* createShape() { return new Triangle; }
+};
+
+class RectangleClient : public ShapeFactory
+{
+public:
+	Shape* createShape() { return new Rectangle; }
 };
 
 int main()
 {
-	Shape triangle = Shape(3, 4, 5);
-	cout << triangle.geometry->getArea() << " " << triangle.geometry->getPerimeter() << endl;
-	Shape square = Shape(10);
-	cout << square.geometry->getArea() << " " << square.geometry->getPerimeter() << endl;
-	Shape rectangle = Shape(7, 8);
-	cout << rectangle.geometry->getArea() << " " << rectangle.geometry->getPerimeter() << endl;
+	
+	Shape* triangle = TriangleClient().createShape();
+	cout << triangle->getArea() << " " << triangle->getPerimeter() << endl;
+	Shape* square = SquareClient().createShape();
+	cout << square->getArea() << " " << square->getPerimeter() << endl;
+	Shape* rectangle = RectangleClient().createShape();
+	cout << rectangle->getArea() << " " << rectangle->getPerimeter() << endl;
 	return 0;
 }
