@@ -1,5 +1,4 @@
- #include <iostream>
-#include <map>
+#include <iostream>
 using namespace std;
 
 //Base product class
@@ -34,34 +33,6 @@ class DaedricArmor : public Armor
      }
 };
 
-/*
- //Factory method using templates
- //We'll be using the base class and its subclasses defined above
- //Using templates, we won't have to create a subclass factory for each product type
- 
- class ArmorFactory {
- public:
-     virtual Armor* CreateArmor() = 0;
- };
- 
-template <class ArmorType>
-class ArmorCreator: public ArmorFactory {
-    public:
-    virtual Armor* CreateArmor();
-};
-
-template <class ArmorType>
-Armor* ArmorCreator<ArmorType>::CreateArmor()
-{
-    cout<<typeid(ArmorType).name()<<" forged\n";
-    return new ArmorType;
-}
-*/
-
-/*
- If we use templates, all the factory classes
- defined below will have to be deleted
- */
 //Creator
 class ArmorFactory {
     public:
@@ -96,9 +67,10 @@ class DaedricArmorFactory : public ArmorFactory {
         return new DaedricArmor();
     }
 };
-  
+
 
 int main() {
+    
     ArmorFactory* standardArmor = new ArmorFactory();
     standardArmor->CreateArmor();
     
@@ -110,20 +82,6 @@ int main() {
     
     ArmorFactory* elvenArmor = new ElvenArmorFactory();
     elvenArmor->CreateArmor();
-
-/*
- //Factory method using templates
- 
-    ArmorCreator<Armor> standardArmorFactory;
-    standardArmorFactory.CreateArmor();
-     
-    ArmorCreator<DragonboneArmor> dragonboneArmorFactory;
-    dragonboneArmorFactory.CreateArmor();
-    
-    ArmorCreator<ElvenArmor> elvenArmorFactory;
-    elvenArmorFactory.CreateArmor();
-    
-    ArmorCreator<DaedricArmor> daedricArmorFactory;
-    daedricArmorFactory.CreateArmor();
-*/
 }
+
+

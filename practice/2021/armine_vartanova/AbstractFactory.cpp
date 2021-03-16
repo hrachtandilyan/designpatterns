@@ -87,82 +87,83 @@ class ElvenBoots : public Boots {
      }
 };
 
-enum ArmorPiece { HEADGEAR, BOOTS, CUIRASS, GAUNTLETS };
-
 class Equipment {
-private: map<ArmorPiece,Armor*> _equipment;
+private:
+    Gauntlets* g;
+    Cuirass* c;
+    Headgear* h;
+    Boots* b;
 public:
-    void AddGauntlets(Gauntlets* g)
+    void setGauntlets(Gauntlets* g)
     {
-        if (_equipment.find(GAUNTLETS) == _equipment.end())
-        {
-            _equipment.insert({GAUNTLETS,g});
-        }
+        this->g = g;
     }
-    
-    void AddCuirass(Cuirass* c)
+    void  setCuirass(Cuirass* c)
     {
-        if (_equipment.find(CUIRASS) == _equipment.end())
-        {
-            _equipment.insert({CUIRASS,c});
-        }
+        this->c = c;
     }
-    
-    void AddHeadgear(Headgear* h)
+    void setHeadgear(Headgear* h)
     {
-        if (_equipment.find(HEADGEAR) == _equipment.end())
-        {
-            _equipment.insert({HEADGEAR,h});
-        }
+        this->h = h;
     }
-    
-    void AddBoots(Boots* b)
+    void setBoots(Boots* b)
     {
-        if (_equipment.find(BOOTS) == _equipment.end())
-        {
-            _equipment.insert({BOOTS,b});
-        }
+        this->b = b;
     }
 };
 
 class ArmorFactory
 {
 public:
-    virtual Equipment* MakeEquipment() const
-    { return new Equipment; }
+    virtual Equipment* makeEquipment() const
+    {
+        return new Equipment;        
+    }
     
-    virtual Gauntlets* MakeGauntlets() const
-    { cout<<"Standard gauntlets forged."<<endl;
-        return new Gauntlets;   }
-    virtual Headgear* MakeHeadgear() const
-    { cout<<"Standard headgear forged."<<endl;
-        return new Headgear; }
-    virtual Cuirass* MakeCuirass() const
-    { cout<<"Standard cuirass forged."<<endl;
-        return new Cuirass; }
-    virtual Boots* MakeBoots() const
-    { cout<<"Standard boots forged."<<endl;
-        return new Boots; }
+    virtual Gauntlets* makeGauntlets() const
+    {
+        cout<<"Standard gauntlets forged."<<endl;
+        return new Gauntlets;
+        
+    }
+    virtual Headgear* makeHeadgear() const
+    {
+        cout<<"Standard headgear forged."<<endl;
+        return new Headgear;
+        
+    }
+    virtual Cuirass* makeCuirass() const
+    {
+        cout<<"Standard cuirass forged."<<endl;
+        return new Cuirass;
+        
+    }
+    virtual Boots* makeBoots() const
+    {
+        cout<<"Standard boots forged."<<endl;
+        return new Boots;
+        
+    }
 };
 
 class DragonboneArmorFactory : public ArmorFactory {
     public:
-    virtual Gauntlets* MakeGauntlets() const
+    virtual Gauntlets* makeGauntlets() const
     {
         cout<<"Dragonbone gauntlets forged."<<endl;
         return new DragonboneGauntlets;
     }
-    virtual Headgear* MakeHeadgear() const
+    virtual Headgear* makeHeadgear() const
     {
         cout<<"Dragonbone headgear forged."<<endl;
         return new DragonboneHeadgear;
     }
-    virtual Cuirass* MakeCuirass() const
+    virtual Cuirass* makeCuirass() const
     {
         cout<<"Dragonbone cuirass forged."<<endl;
         return new DragonboneCuirass;
     }
-    virtual Boots* MakeBoots() const
+    virtual Boots* makeBoots() const
     {
         cout<<"Dragonbone boots forged."<<endl;
         return new DragonboneBoots;
@@ -171,22 +172,22 @@ class DragonboneArmorFactory : public ArmorFactory {
 
 class ElvenArmorFactory : public ArmorFactory {
     public:
-    virtual Gauntlets* MakeGauntlets() const
+    virtual Gauntlets* makeGauntlets() const
     {
         cout<<"Elven gauntlets forged."<<endl;
         return new ElvenGauntlets;
     }
-    virtual Headgear* MakeHeadgear() const
+    virtual Headgear* makeHeadgear() const
     {
         cout<<"Elven headgear forged."<<endl;
         return new ElvenHeadgear;
     }
-    virtual Cuirass* MakeCuirass() const
+    virtual Cuirass* makeCuirass() const
     {
         cout<<"Elven cuirass forged."<<endl;
         return new ElvenCuirass;
     }
-    virtual Boots* MakeBoots() const
+    virtual Boots* makeBoots() const
     {
         cout<<"Elven boots forged."<<endl;
         return new ElvenBoots;
@@ -198,15 +199,15 @@ class ArmorCreator {
     Equipment* CreateEquipment(ArmorFactory& factory);
 };
 Equipment* ArmorCreator::CreateEquipment (ArmorFactory& factory) {
-    Equipment* equipment = factory.MakeEquipment();
-    Gauntlets* gauntlets = factory.MakeGauntlets();
-    Headgear* headgear = factory.MakeHeadgear();
-    Cuirass* cuirass = factory.MakeCuirass();
-    Boots* boots = factory.MakeBoots();
-    equipment->AddGauntlets(gauntlets);
-    equipment->AddHeadgear(headgear);
-    equipment->AddCuirass(cuirass);
-    equipment->AddBoots(boots);
+    Equipment* equipment = factory.makeEquipment();
+    Gauntlets* gauntlets = factory.makeGauntlets();
+    Headgear* headgear = factory.makeHeadgear();
+    Cuirass* cuirass = factory.makeCuirass();
+    Boots* boots = factory.makeBoots();
+    equipment->setGauntlets(gauntlets);
+    equipment->setHeadgear(headgear);
+    equipment->setCuirass(cuirass);
+    equipment->setBoots(boots);
     cout<<"Full armor equipped."<<endl;
     return equipment;
 }
