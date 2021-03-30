@@ -36,15 +36,29 @@ class DaedricArmor : public Armor
 //Creator
 class ArmorFactory {
     public:
+    static ArmorFactory& getInstance(){
+        static ArmorFactory instance;
+        return instance;
+      }
     virtual Armor* CreateArmor()
     {
         cout<<"Standard armor forged\n";
         return new Armor();
     };
+    
+    protected:
+    ArmorFactory()= default;
+    ~ArmorFactory()= default;
+    ArmorFactory(const ArmorFactory&)= delete;
+    ArmorFactory& operator=(const ArmorFactory&)= delete;
 };
 
 class DragonboneArmorFactory : public ArmorFactory {
     public:
+    static DragonboneArmorFactory& getInstance(){
+        static DragonboneArmorFactory instance;
+        return instance;
+      }
     Armor* CreateArmor()
     {
         cout<<"Dragonbone armor forged\n";
@@ -53,6 +67,10 @@ class DragonboneArmorFactory : public ArmorFactory {
 };
 class ElvenArmorFactory : public ArmorFactory {
     public:
+    static ElvenArmorFactory& getInstance(){
+        static ElvenArmorFactory instance;
+        return instance;
+    }
     Armor* CreateArmor()
     {
         cout<<"Elven armor forged\n";
@@ -61,6 +79,10 @@ class ElvenArmorFactory : public ArmorFactory {
 };
 class DaedricArmorFactory : public ArmorFactory {
     public:
+    static DaedricArmorFactory& getInstance(){
+        static DaedricArmorFactory instance;
+        return instance;
+    }
     Armor* CreateArmor()
     {
         cout<<"Daedric armor forged\n";
@@ -70,17 +92,17 @@ class DaedricArmorFactory : public ArmorFactory {
 
 int main() {
     
-    ArmorFactory* standardArmor = new ArmorFactory();
-    standardArmor->CreateArmor();
+    ArmorFactory& standardFactory = ArmorFactory::getInstance();
+    standardFactory.CreateArmor();
     
-    ArmorFactory* dragonboneArmor = new ArmorFactory();
-    dragonboneArmor->CreateArmor();
+    DragonboneArmorFactory& dragonboneFactory = DragonboneArmorFactory::getInstance();
+    dragonboneFactory.CreateArmor();
     
-    ArmorFactory* daedricArmor = new DaedricArmorFactory();
-    daedricArmor->CreateArmor();
+    DaedricArmorFactory& daedricFactory = DaedricArmorFactory::getInstance();
+    daedricFactory.CreateArmor();
     
-    ArmorFactory* elvenArmor = new ElvenArmorFactory();
-    elvenArmor->CreateArmor();
+    ElvenArmorFactory& elvenFactory = ElvenArmorFactory::getInstance();
+    elvenFactory.CreateArmor();
 }
 
 

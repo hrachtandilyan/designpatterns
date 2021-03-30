@@ -12,7 +12,14 @@ public:
         this->price = obj->price;
     }
     virtual InventoryObject* clone() const
-    { return new InventoryObject(*this); }
+    {
+        return new InventoryObject(*this);
+        /*
+         since we use a constructor here, this would've been
+         a shallow clone if class fields (price)
+         weren't of primitive types
+        */
+    }
 };
 
 class Armor : InventoryObject
@@ -125,6 +132,9 @@ public:
     }
 };
 
+
+
+
 class Inventory
 {
 private:
@@ -180,7 +190,7 @@ public:
     }
 };
 
-
+//Client
 class InventoryCreator {
     public:
     Inventory* CreateInventory(InventoryPrototypeFactory& factory)

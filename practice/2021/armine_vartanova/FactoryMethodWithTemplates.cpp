@@ -66,5 +66,3 @@ int main() {
    ArmorCreator<DaedricArmor> daedricArmorFactory;
    daedricArmorFactory.CreateArmor();
 }
-
-
